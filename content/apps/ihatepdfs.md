@@ -11,6 +11,8 @@ links:
     url: "https://github.com/akkolli/ihatepdfs"
   - label: "Download"
     url: "https://github.com/akkolli/ihatepdfs/releases/latest"
+  - label: "Privacy Policy"
+    url: "/projects/ihatepdfs/privacy/"
 toc: true
 math: false
 ---
