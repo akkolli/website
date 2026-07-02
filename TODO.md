@@ -1,1 +1,2 @@
 - Add paper pages
+- setup inspire-me
