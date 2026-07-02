@@ -12,7 +12,7 @@ links:
   - label: "GitHub"
     url: "https://github.com/akkolli/ihatepdfs"
   - label: "Download"
-    url: "https://github.com/akkolli/ihatepdfs/releases/latest"
+    url: "https://apps.apple.com/us/app/ihatepdfs/id6782450919?mt=12"
 toc: true
 math: false
 ---
