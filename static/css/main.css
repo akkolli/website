@@ -319,6 +319,7 @@ summary,
   grid-template-columns: 3.25rem minmax(0, 1fr);
   gap: 0.28rem;
   align-items: start;
+  min-width: 0;
   padding: 0.16rem 0.32rem 0.2rem;
   border: var(--rule) solid var(--line);
   background: var(--paper);
@@ -424,9 +425,15 @@ summary,
 }
 
 .item-title {
-  flex: 0 0 auto;
+  display: block;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
   font-size: 1.12rem;
   line-height: 1.05;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .item-title:hover,
@@ -457,15 +464,18 @@ summary,
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.08rem 0.48rem;
   align-items: baseline;
+  width: 100%;
   min-width: 0;
   line-height: 1.15;
 }
 
 .item-head {
   display: flex;
+  flex-wrap: nowrap;
   gap: 0.32rem;
   align-items: baseline;
   min-width: 0;
+  overflow: hidden;
 }
 
 .post-title-tags {
@@ -511,6 +521,7 @@ summary,
 .row-summary {
   grid-column: 1 / -1;
   min-width: 4rem;
+  max-width: 100%;
   margin: 0;
   padding-left: 1rem;
   overflow: hidden;
@@ -522,6 +533,7 @@ summary,
 }
 
 .item-status {
+  flex: 0 0 auto;
   display: inline-block;
   color: var(--muted);
   font-size: 0.72rem;
@@ -551,17 +563,22 @@ summary,
   display: inline-flex;
   flex-wrap: wrap;
   gap: 0.42rem;
+  min-width: 0;
+  max-width: 100%;
   margin: 0;
 }
 
 .item-links a {
   display: inline-block;
+  max-width: 100%;
   padding: 0.06rem 0.36rem 0.08rem;
   border: 1px solid currentColor;
   background: var(--paper);
   color: var(--ink);
   box-shadow: 1px 1px 0 currentColor;
   line-height: 1.1;
+  overflow-wrap: anywhere;
+  white-space: nowrap;
 }
 
 .item-links a:hover,
@@ -1127,11 +1144,16 @@ summary,
     padding: 0.42rem 0.48rem 0.5rem;
   }
 
-  .post-row,
-  .item-row {
+  .post-row {
     grid-template-columns: 1fr;
     gap: 0.08rem;
     padding: 0.36rem 0;
+  }
+
+  .item-row {
+    grid-template-columns: 3.15rem minmax(0, 1fr);
+    gap: 0.2rem;
+    padding: 0.28rem 0.32rem;
   }
 
   .post-row + .post-row {
@@ -1143,8 +1165,12 @@ summary,
   }
 
   .item-body {
-    grid-template-columns: 1fr;
-    gap: 0.1rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.08rem 0.36rem;
+  }
+
+  .item-head {
+    gap: 0.12rem 0.32rem;
   }
 
   .item-side {
@@ -1155,7 +1181,19 @@ summary,
   }
 
   .row-summary {
-    grid-column: 1;
+    grid-column: 1 / -1;
+    min-width: 0;
+    padding-left: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .item-links {
+    width: auto;
+    gap: 0.24rem;
+    flex-wrap: nowrap;
+    justify-self: end;
   }
 
   .post-row time,
