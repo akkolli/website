@@ -1,0 +1,39 @@
+<!doctype html>
+<html
+  lang="{{ site.Language.Locale | default "en-us" }}"
+  data-display="{{ site.Params.displayMode | default "crt" }}"
+  data-density="{{ site.Params.density | default "compact" }}"
+>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    {{- if .IsHome -}}
+      {{ site.Title }} · {{ site.Params.author }}
+    {{- else -}}
+      {{ .Title }} · {{ site.Title }}
+    {{- end -}}
+  </title>
+  <meta name="description" content="{{ .Description | default site.Params.description }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ "index.xml" | absURL }}">
+
+  <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+
+  {{ if .Param "math" }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+      onload="renderMathInElement(document.body, { delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false });"
+    ></script>
+  {{ end }}
+
+  <script defer src="{{ "js/site.js" | relURL }}"></script>
+</head>
+
+<body>
+  {{ block "main" . }}{{ end }}
+
+</body>
+</html>

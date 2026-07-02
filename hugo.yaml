@@ -1,0 +1,44 @@
+baseURL: "https://akkolli.net/"
+locale: "en-us"
+title: "Akshay Kolli"
+
+enableRobotsTXT: true
+
+params:
+  author: "Akshay Kolli"
+  description: "PhD student at UMass Lowell -- World Models & Reinforcement Learning."
+  displayMode: "crt"
+  density: "compact"
+  social:
+    - name: "GitHub"
+      url: "https://github.com/akkolli"
+      icon: "github"
+    - name: "LinkedIn"
+      url: "https://www.linkedin.com/in/akshay-kolli-/"
+      icon: "linkedin"
+    - name: "Google Scholar"
+      url: "https://scholar.google.com/citations?user=aAezuzMAAAAJ&hl=en"
+      icon: "google-scholar"
+    - name: "Twitter"
+      url: "https://twitter.com/thekolliakshay"
+      icon: "twitter"
+    - name: "Gitea"
+      url: "https://code.akkolli.net/explore/repos"
+      icon: "gitea"
+    - name: "RSS"
+      url: "/index.xml"
+      icon: "rss"
+      internal: true
+
+disableKinds:
+  - taxonomy
+  - term
+
+markup:
+  tableOfContents:
+    startupLevel: 2
+    endLevel: 3
+    ordered: false
+  highlight:
+    guessSyntax: true
+    noClasses: false

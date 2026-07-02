@@ -1,0 +1,18 @@
+{{ with site.Params.social }}
+  <nav class="social-links" aria-label="Social links">
+    {{ range . }}
+      {{ if .url }}
+        <a
+          class="social-link"
+          href="{{ .url }}"
+          {{ if not .internal }}target="_blank" rel="me noopener noreferrer"{{ end }}
+          aria-label="{{ .name }}"
+          title="{{ .name }}"
+        >
+          <img src="{{ printf "icons/%s.svg" .icon | relURL }}" alt="" width="14" height="14">
+          <span class="sr-only">{{ .name }}</span>
+        </a>
+      {{ end }}
+    {{ end }}
+  </nav>
+{{ end }}

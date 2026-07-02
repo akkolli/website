@@ -1,0 +1,25 @@
+{{ with .pages }}
+  <section class="home-section" id="{{ $.id }}" aria-labelledby="{{ $.id }}-heading">
+    <h2 id="{{ $.id }}-heading">{{ $.title }}</h2>
+
+    <div class="item-list">
+      {{ range .ByWeight }}
+        <article class="item-row">
+          <div class="item-year">{{ with .Date }}{{ .Format "2006" }}{{ end }}</div>
+          <div>
+            <a class="item-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+            {{ with .Description }}<p class="row-summary">{{ . }}</p>{{ end }}
+            {{ with .Params.status }}<div class="item-meta">{{ . }}</div>{{ end }}
+            {{ with .Params.links }}
+              <div class="item-links">
+                {{ range . }}
+                  <a href="{{ .url }}">{{ .label }}</a>
+                {{ end }}
+              </div>
+            {{ end }}
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

@@ -1,0 +1,6 @@
+{{ define "main" }}
+<main class="home">
+  {{ partial "home-intro.html" . }}
+  {{ partial "file-index.html" (dict "active" .Section) }}
+</main>
+{{ end }}

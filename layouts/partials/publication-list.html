@@ -1,0 +1,19 @@
+{{ with . }}
+  <div class="item-list">
+    {{ range sort . "year" "desc" }}
+      {{ $pubTitle := .title }}
+      {{ $authors := .authors }}
+      <article class="item-row">
+        <div class="item-year">{{ .year }}</div>
+        <div class="item-body">
+          <div class="item-head">
+            <div class="item-title">{{ $pubTitle }}</div>
+          </div>
+          {{ with $authors }}<p class="row-summary">{{ . }}</p>{{ end }}
+        </div>
+      </article>
+    {{ end }}
+  </div>
+{{ else }}
+  <p class="empty-list">No publications yet.</p>
+{{ end }}

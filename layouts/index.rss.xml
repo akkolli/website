@@ -1,0 +1,56 @@
+{{- $items := slice -}}
+{{- range where site.RegularPages "Section" "in" (slice "posts" "projects" "apps") -}}
+  {{- $description := .Description | default (.Summary | plainify) -}}
+  {{- $section := title .Section -}}
+  {{- if eq .Section "apps" }}{{ $section = "Projects" }}{{ end -}}
+  {{- $items = $items | append (dict
+    "title" .Title
+    "link" .Permalink
+    "guid" .Permalink
+    "date" .Date
+    "section" $section
+    "description" $description
+  ) -}}
+{{- end -}}
+
+{{- range hugo.Data.publications -}}
+  {{- $parts := slice -}}
+  {{- with .authors }}{{ $parts = $parts | append . }}{{ end -}}
+  {{- with .venue }}{{ $parts = $parts | append . }}{{ end -}}
+  {{- $link := ("/publications/" | absURL) -}}
+  {{- with .links }}{{ with index . 0 }}{{ $link = .url }}{{ end }}{{ end -}}
+  {{- $items = $items | append (dict
+    "title" .title
+    "link" $link
+    "guid" $link
+    "date" (time.AsTime (printf "%v-01-01T00:00:00Z" .year))
+    "section" "Publications"
+    "description" (delimit $parts ". ")
+  ) -}}
+{{- end -}}
+
+{{- $items = sort $items "date" "desc" -}}
+{{- $latest := now -}}
+{{- with index $items 0 }}{{ $latest = .date }}{{ end -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ site.Title | html }}</title>
+    <link>{{ site.Home.Permalink }}</link>
+    <description>{{ site.Params.description | html }}</description>
+    <generator>Hugo</generator>
+    <language>{{ site.Language.Locale | default "en-us" }}</language>
+    <lastBuildDate>{{ $latest.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</lastBuildDate>
+    <atom:link href="{{ "index.xml" | absURL }}" rel="self" type="application/rss+xml" />
+    {{ range $items }}
+      <item>
+        <title>{{ .title | html }}</title>
+        <link>{{ .link }}</link>
+        <pubDate>{{ .date.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</pubDate>
+        <guid>{{ .guid }}</guid>
+        <category>{{ .section | html }}</category>
+        <description>{{ .description | plainify | html }}</description>
+      </item>
+    {{ end }}
+  </channel>
+</rss>

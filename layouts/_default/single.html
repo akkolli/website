@@ -1,0 +1,63 @@
+{{ define "main" }}
+<article class="post" id="top">
+  {{ $hasToc := and (ne .Params.toc false) (gt (len (findRE "<li>" .TableOfContents)) 0) }}
+  {{ $backHref := "/" | relURL }}
+  {{ $backLabel := "Home" }}
+  {{ if in (slice "apps" "projects" "websites") .Section }}
+    {{ $backHref = "/projects/" | relURL }}
+    {{ $backLabel = "Projects" }}
+  {{ else if eq .Section "publications" }}
+    {{ $backHref = "/publications/" | relURL }}
+    {{ $backLabel = "Publications" }}
+  {{ end }}
+  <div class="post-layout{{ if $hasToc }} has-toc{{ end }}">
+    {{ if $hasToc }}
+      <aside class="post-margin" aria-label="Table of contents">
+        <div class="toc">
+          <div class="toc-title">Contents</div>
+          {{ .TableOfContents }}
+        </div>
+      </aside>
+    {{ end }}
+
+    <div class="post-shell">
+      <header class="post-header">
+        <a class="back-link" href="{{ $backHref }}" aria-label="Back to {{ $backLabel }}" title="Back to {{ $backLabel }}">&lt; {{ $backLabel }}</a>
+
+        <h1>{{ .Title }}</h1>
+
+        <div class="post-meta">
+          {{ if eq .Section "posts" }}
+            <time datetime="{{ .Date.Format "2006-01-02" }}">
+              {{ .Date.Format "02 Jan 2006" }}
+            </time>
+          {{ else }}
+            <span>{{ .Section | singularize | title }}</span>
+            {{ with .Params.status }}
+              <span class="dot">·</span>
+              <span>{{ . }}</span>
+            {{ end }}
+          {{ end }}
+        </div>
+
+        {{ with .Params.links }}
+          <div class="item-links article-links">
+            {{ $pageTitle := $.Title }}
+            {{ range . }}
+              <a href="{{ .url }}" aria-label="{{ .label }} for {{ $pageTitle }}" title="{{ .label }} for {{ $pageTitle }}">{{ .label }}</a>
+            {{ end }}
+          </div>
+        {{ end }}
+      </header>
+
+      <main class="post-content">
+        {{ .Content }}
+      </main>
+
+      <footer class="post-footer">
+        <a class="post-button" href="#top" aria-label="Scroll to top" title="Scroll to top">^ Top</a>
+      </footer>
+    </div>
+  </div>
+</article>
+{{ end }}

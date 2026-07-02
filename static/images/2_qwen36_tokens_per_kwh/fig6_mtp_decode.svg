@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">MTP speculative decoding</title>
+  <desc id="desc">A simplified diagram showing a multi token prediction path proposing draft tokens and the target model verifying them together.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f4ed; }
+      .panel { fill: #fffdf7; stroke: #cfc8ba; stroke-width: 2; }
+      .ink { fill: #181612; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .muted { fill: #6b6254; font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; }
+      .box-title { fill: #181612; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; text-anchor: middle; }
+      .box-sub { fill: #6b6254; font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; text-anchor: middle; }
+      .accent { fill: #0f6f77; }
+      .warm { fill: #c06922; }
+      .cool { fill: #315f9f; }
+      .arrow-line { stroke: #5c554a; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .arrow-head { fill: #5c554a; }
+      .thin { stroke: #b8ad9b; stroke-width: 2; fill: none; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="560" rx="24"/>
+
+  <text class="ink" x="56" y="72" font-size="34" font-weight="650">MTP speculative decode</text>
+  <text class="muted" x="56" y="112" font-size="18">draft several tokens, verify them, keep the accepted prefix</text>
+
+  <rect class="panel" x="72" y="218" width="220" height="118" rx="18"/>
+  <text class="box-title" x="182" y="268" font-size="24" font-weight="650">context</text>
+  <text class="box-sub" x="182" y="304" font-size="17">prompt + KV cache</text>
+
+  <path class="arrow-line" d="M292 277 C342 277 342 196 395 196"/>
+  <path class="arrow-head" d="M420 196 L395 183 L395 209 Z"/>
+
+  <path class="arrow-line" d="M292 277 C342 277 342 374 395 374"/>
+  <path class="arrow-head" d="M420 374 L395 361 L395 387 Z"/>
+
+  <rect class="panel" x="440" y="138" width="270" height="116" rx="20"/>
+  <text class="box-title" x="575" y="188" font-size="24" font-weight="650">MTP lookahead</text>
+  <text class="box-sub" x="575" y="224" font-size="17">propose draft tokens</text>
+
+  <rect class="panel" x="440" y="316" width="270" height="116" rx="20"/>
+  <text class="box-title" x="575" y="366" font-size="24" font-weight="650">target model</text>
+  <text class="box-sub" x="575" y="402" font-size="17">verify in one pass</text>
+
+  <path class="arrow-line" d="M710 196 L738 196"/>
+  <path class="arrow-head" d="M763 196 L738 183 L738 209 Z"/>
+
+  <g transform="translate(782 170)">
+    <rect class="warm" x="0" y="0" width="54" height="54" rx="12"/>
+    <rect class="warm" x="66" y="0" width="54" height="54" rx="12"/>
+    <rect class="warm" x="132" y="0" width="54" height="54" rx="12"/>
+    <rect class="warm" x="198" y="0" width="54" height="54" rx="12"/>
+    <rect class="warm" x="264" y="0" width="54" height="54" rx="12"/>
+    <rect class="warm" x="330" y="0" width="54" height="54" rx="12"/>
+  </g>
+  <text class="muted" x="874" y="252" font-size="17">draft block</text>
+
+  <path class="arrow-line" d="M710 374 L748 374"/>
+  <path class="arrow-head" d="M773 374 L748 361 L748 387 Z"/>
+
+  <path class="arrow-line" d="M1030 232 L1030 340"/>
+  <path class="arrow-head" d="M1030 365 L1017 340 L1043 340 Z"/>
+
+  <rect class="panel" x="790" y="356" width="344" height="102" rx="18"/>
+  <rect class="accent" x="820" y="384" width="50" height="50" rx="11"/>
+  <rect class="accent" x="880" y="384" width="50" height="50" rx="11"/>
+  <rect class="accent" x="940" y="384" width="50" height="50" rx="11"/>
+  <rect class="cool" x="1000" y="384" width="50" height="50" rx="11"/>
+  <rect class="cool" x="1060" y="384" width="50" height="50" rx="11"/>
+
+  <path class="thin" d="M820 448 L990 448"/>
+  <text class="muted" x="820" y="492" font-size="16">accepted prefix, retry on mismatch</text>
+  <text class="muted" x="720" y="530" font-size="16">best case, one pass advances several tokens</text>
+</svg>

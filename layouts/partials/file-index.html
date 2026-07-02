@@ -1,0 +1,35 @@
+{{ $active := .active | default "posts" }}
+{{ $tabs := slice
+  (dict "id" "posts" "label" "Posts" "href" ("/" | relURL))
+  (dict "id" "projects" "label" "Projects" "href" ("/projects/" | relURL))
+  (dict "id" "publications" "label" "Publications" "href" ("/publications/" | relURL))
+  (dict "id" "contact" "label" "Contact" "href" ("/contact/" | relURL))
+}}
+
+<div class="file-index">
+  <nav class="file-tabs" aria-label="Index views">
+    {{ range $tabs }}
+      <a
+        class="file-tab{{ if eq $active .id }} active{{ end }}"
+        href="{{ .href }}"
+        aria-label="Show {{ .label }}"
+        title="Show {{ .label }}"
+        {{ if eq $active .id }}aria-current="page"{{ end }}
+      >{{ .label }}</a>
+    {{ end }}
+  </nav>
+
+  <section class="file-panel" aria-labelledby="{{ $active }}-heading">
+    <h2 class="sr-only" id="{{ $active }}-heading">{{ title $active }}</h2>
+
+    {{ if eq $active "publications" }}
+      {{ partial "publication-list.html" hugo.Data.publications }}
+    {{ else if eq $active "projects" }}
+      {{ partial "page-list.html" (where site.RegularPages "Section" "in" (slice "projects" "apps")) }}
+    {{ else if eq $active "contact" }}
+      {{ partial "contact-section.html" . }}
+    {{ else }}
+      {{ partial "post-list.html" (where site.RegularPages "Section" "posts") }}
+    {{ end }}
+  </section>
+</div>

@@ -1,0 +1,4 @@
+{{ $id := .Get 0 }}
+{{ $figures := .Page.Scratch.Get "figures" | default dict }}
+{{ $number := index $figures $id }}
+<a class="xref" href="#{{ $id }}">Figure {{ with $number }}{{ . }}{{ else }}{{ $id }}{{ end }}</a>

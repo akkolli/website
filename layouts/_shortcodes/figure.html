@@ -1,0 +1,20 @@
+{{ $id := .Get "id" | default (printf "figure-%d" .Ordinal) }}
+{{ $src := .Get "src" }}
+{{ $caption := .Get "caption" }}
+{{ $alt := .Get "alt" | default $caption }}
+{{ $figures := .Page.Scratch.Get "figures" | default dict }}
+{{ $number := add (len $figures) 1 }}
+{{ .Page.Scratch.SetInMap "figures" $id $number }}
+
+<figure id="{{ $id }}" class="figure">
+  {{ with $src }}
+    <img src="{{ . | relURL }}" alt="{{ $alt }}">
+  {{ end }}
+
+  {{ if or $caption .Inner }}
+    <figcaption>
+      <span class="figure-label">Figure {{ $number }}.</span>
+      {{ with $caption }}{{ . | markdownify }}{{ else }}{{ .Inner | markdownify }}{{ end }}
+    </figcaption>
+  {{ end }}
+</figure>

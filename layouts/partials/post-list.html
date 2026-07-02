@@ -1,0 +1,27 @@
+{{ with . }}
+  <div class="tag-filter-status" data-tag-filter-status hidden>
+    <span>Showing <span data-tag-filter-name></span></span>
+    <a href="{{ "/" | relURL }}" aria-label="Clear tag filter" title="Clear tag filter">clear</a>
+  </div>
+
+  <div class="post-list" data-post-list>
+    {{ range .ByDate.Reverse }}
+      {{ $tags := .Params.tags | default (slice) }}
+      <article class="post-row" data-tags='{{ jsonify $tags }}'>
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan 2006" }}</time>
+        <div class="post-row-body">
+          <a class="post-title" href="{{ .RelPermalink }}" aria-label="Read {{ .Title }}" title="Read {{ .Title }}">{{ .Title }}</a>
+          {{ with $tags }}
+            <span class="post-title-tags">
+              {{ range . }}
+                <a class="post-tag" href="{{ "/" | relURL }}?tag={{ . | urlquery }}" data-tag="{{ . }}" aria-label="Filter posts by {{ . }}" title="Filter posts by {{ . }}">{{ . }}</a>
+              {{ end }}
+            </span>
+          {{ end }}
+        </div>
+      </article>
+    {{ end }}
+  </div>
+{{ else }}
+  <p class="empty-list">No posts yet.</p>
+{{ end }}

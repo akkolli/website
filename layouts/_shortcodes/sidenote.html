@@ -1,0 +1,10 @@
+<a
+  id="snref-{{ .Ordinal }}"
+  class="sidenote-number"
+  href="#sn-{{ .Ordinal }}"
+  role="doc-noteref"
+  aria-label="Sidenote {{ add .Ordinal 1 }}"
+></a>
+<span id="sn-{{ .Ordinal }}" class="sidenote" role="doc-endnote">
+  {{ .Inner | markdownify }}
+</span>

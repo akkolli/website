@@ -1,0 +1,26 @@
+{{ with . }}
+  <div class="item-list">
+    {{ range .ByWeight }}
+      {{ $pageTitle := .Title }}
+      <article class="item-row" data-row-href="{{ .RelPermalink }}" role="link" tabindex="0" aria-label="Open {{ $pageTitle }}">
+        <div class="item-year">{{ with .Date }}{{ .Format "2006" }}{{ end }}</div>
+        <div class="item-body">
+          <div class="item-head">
+            <a class="item-title" href="{{ .RelPermalink }}" aria-label="Open {{ $pageTitle }}" title="Open {{ $pageTitle }}">{{ $pageTitle }}</a>
+            {{ with .Params.status }}
+              <span class="item-status">{{ . }}</span>
+            {{ end }}
+          </div>
+          {{ with .Params.links }}
+            <span class="item-links">
+              {{ range . }}<a href="{{ .url }}" aria-label="{{ .label }} for {{ $pageTitle }}" title="{{ .label }} for {{ $pageTitle }}">{{ .label }}</a>{{ end }}
+            </span>
+          {{ end }}
+          {{ with .Description }}<p class="row-summary">{{ . }}</p>{{ end }}
+        </div>
+      </article>
+    {{ end }}
+  </div>
+{{ else }}
+  <p class="empty-list">No projects yet.</p>
+{{ end }}

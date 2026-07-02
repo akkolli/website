@@ -1,0 +1,7 @@
+.git
+.github
+.gitea
+.hugo_build.lock
+.DS_Store
+public
+resources/_gen
