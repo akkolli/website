@@ -6,6 +6,8 @@ description: "A local-only macOS clipboard manager with a keyboard-first bottom 
 tags: ["Swift", "AppKit", "macOS", "Clipboard", "SQLite"]
 status: "open beta"
 weight: 20
+aliases:
+  - /apps/clipbored/
 links:
   - label: "GitHub"
     url: "https://github.com/akkolli/clipbored"
@@ -15,7 +17,7 @@ math: false
 
 ClipBored is a small native macOS clipboard manager. It captures local clipboard history and opens a keyboard-first responsive bottom panel for search, sorting, copy, paste, pinning, deletion, and organization.
 
-{{< figure src="/images/apps/clipbored/panel.png" alt="ClipBored clipboard panel snapshot." />}}
+{{< figure src="/images/projects/clipbored/panel.png" alt="ClipBored clipboard panel snapshot." />}}
 
 ## What It Does
 

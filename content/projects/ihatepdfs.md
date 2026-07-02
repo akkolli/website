@@ -6,6 +6,8 @@ description: "A tiny native macOS PDF reader for local reading, highlighting, co
 tags: ["Swift", "SwiftUI", "PDFKit", "macOS"]
 status: "open beta"
 weight: 30
+aliases:
+  - /apps/ihatepdfs/
 links:
   - label: "GitHub"
     url: "https://github.com/akkolli/ihatepdfs"
@@ -19,7 +21,7 @@ math: false
 
 I Hate PDFs is a small native macOS PDF reader for local reading, highlighting, commenting, and review. It uses SwiftUI, AppKit, and PDFKit, keeps documents on your Mac, and avoids accounts, tracking, and cloud upload.
 
-{{< figure src="/images/apps/ihatepdfs/default-reading.png" alt="I Hate PDFs default reading mode." />}}
+{{< figure src="/images/projects/ihatepdfs/default-reading.png" alt="I Hate PDFs default reading mode." />}}
 
 ## What It Does
 

@@ -6,6 +6,8 @@ description: "A local-first native SwiftUI feed reader for macOS and iOS."
 tags: ["Swift", "SwiftUI", "RSS", "macOS", "iOS"]
 status: "open beta"
 weight: 10
+aliases:
+  - /apps/feedme/
 links: []
 toc: true
 math: false
@@ -13,7 +15,7 @@ math: false
 
 FeedMe is a small native SwiftUI feed reader for macOS and iOS. It is local-first, account-free, and built around a shared Swift package for feed parsing, OPML import/export, refresh orchestration, and SQLite persistence.
 
-{{< figure src="/images/apps/feedme/demo.png" alt="FeedMe running with a local demo library on iOS." />}}
+{{< figure src="/images/projects/feedme/demo.png" alt="FeedMe running with a local demo library on iOS." />}}
 
 ## What It Does
 

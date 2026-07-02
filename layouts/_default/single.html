@@ -3,7 +3,7 @@
   {{ $hasToc := and (ne .Params.toc false) (gt (len (findRE "<li>" .TableOfContents)) 0) }}
   {{ $backHref := "/" | relURL }}
   {{ $backLabel := "Home" }}
-  {{ if in (slice "apps" "projects" "websites") .Section }}
+  {{ if in (slice "projects" "websites") .Section }}
     {{ $backHref = "/projects/" | relURL }}
     {{ $backLabel = "Projects" }}
   {{ else if eq .Section "publications" }}

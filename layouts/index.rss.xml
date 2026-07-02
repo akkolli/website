@@ -1,8 +1,7 @@
 {{- $items := slice -}}
-{{- range where site.RegularPages "Section" "in" (slice "posts" "projects" "apps") -}}
+{{- range where site.RegularPages "Section" "in" (slice "posts" "projects") -}}
   {{- $description := .Description | default (.Summary | plainify) -}}
   {{- $section := title .Section -}}
-  {{- if eq .Section "apps" }}{{ $section = "Projects" }}{{ end -}}
   {{- $items = $items | append (dict
     "title" .Title
     "link" .Permalink

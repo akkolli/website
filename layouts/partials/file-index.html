@@ -25,7 +25,7 @@
     {{ if eq $active "publications" }}
       {{ partial "publication-list.html" hugo.Data.publications }}
     {{ else if eq $active "projects" }}
-      {{ partial "page-list.html" (where site.RegularPages "Section" "in" (slice "projects" "apps")) }}
+      {{ partial "page-list.html" (where site.RegularPages "Section" "projects") }}
     {{ else if eq $active "contact" }}
       {{ partial "contact-section.html" . }}
     {{ else }}
