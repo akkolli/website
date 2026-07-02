@@ -426,11 +426,6 @@ summary,
   line-height: 1.05;
 }
 
-.item-row[data-row-href] .item-title::before {
-  content: "> ";
-  color: var(--faint);
-}
-
 .item-title:hover,
 .item-title:focus-visible {
   background: transparent;
@@ -442,7 +437,6 @@ summary,
 }
 
 .item-row.is-pressed .item-title,
-.item-row.is-pressed .item-title::before,
 .item-row.is-pressed .item-status {
   color: var(--paper);
 }
