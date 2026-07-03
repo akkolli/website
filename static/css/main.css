@@ -315,7 +315,7 @@ summary,
 
 .item-row {
   display: grid;
-  grid-template-columns: 3.25rem minmax(0, 1fr);
+  grid-template-columns: 4.55rem minmax(0, 1fr);
   gap: 0.28rem;
   align-items: start;
   min-width: 0;
@@ -413,6 +413,10 @@ summary,
 }
 
 .post-row time {
+  white-space: nowrap;
+}
+
+.item-year {
   white-space: nowrap;
 }
 
@@ -1150,7 +1154,7 @@ summary,
   }
 
   .item-row {
-    grid-template-columns: 3.15rem minmax(0, 1fr);
+    grid-template-columns: 4.35rem minmax(0, 1fr);
     gap: 0.2rem;
     padding: 0.28rem 0.32rem;
   }

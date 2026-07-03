@@ -1,10 +1,16 @@
 {{ with . }}
   <div class="item-list">
-    {{ range sort . "year" "desc" }}
+    {{ range sort . "date" "desc" }}
       {{ $pubTitle := .title }}
       {{ $authors := .authors }}
       <article class="item-row">
-        <div class="item-year">{{ .year }}</div>
+        <div class="item-year">
+          {{ with .date }}
+            {{ time.Format "Jan 2006" . }}
+          {{ else }}
+            {{ .year }}
+          {{ end }}
+        </div>
         <div class="item-body">
           <div class="item-head">
             <div class="item-title">{{ $pubTitle }}</div>
