@@ -11,6 +11,8 @@ aliases:
 links:
   - label: "GitHub"
     url: "https://github.com/akkolli/ihatepdfs"
+  - label: "Gitea"
+    url: "https://code.akkolli.net/lepton/ihatepdfs"
   - label: "Download"
     url: "https://apps.apple.com/us/app/ihatepdfs/id6782450919?mt=12"
 toc: true

@@ -11,6 +11,8 @@ aliases:
 links:
   - label: "GitHub"
     url: "https://github.com/akkolli/clipbored"
+  - label: "Gitea"
+    url: "https://code.akkolli.net/lepton/clipbored"
 toc: true
 math: false
 ---
