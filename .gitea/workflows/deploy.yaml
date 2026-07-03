@@ -27,5 +27,5 @@ jobs:
           docker run -d \
             --name website-container \
             --restart unless-stopped \
-            -p 8080:80 \
+            -p 8083:80 \
             akkolli-website:latest
