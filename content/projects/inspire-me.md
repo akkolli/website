@@ -10,7 +10,7 @@ aliases:
   - /apps/inspire-me/
 links:
   - label: "Open"
-    url: "https://akkolli.com/apps/inspire-me/"
+    url: "https://akkolli.net/apps/inspire-me/"
 toc: true
 math: false
 ---
