@@ -1,0 +1,11 @@
+{{ define "main" }}
+<main class="home error-page" id="main-content">
+  {{ partial "home-intro.html" . }}
+  <section class="error-panel" aria-labelledby="not-found-heading">
+    <p class="error-code" aria-hidden="true">404</p>
+    <h2 id="not-found-heading">File not found</h2>
+    <p>The page may have moved, or the address may be incomplete.</p>
+    <a class="post-button" href="{{ "/" | relURL }}">&lt; Home</a>
+  </section>
+</main>
+{{ end }}

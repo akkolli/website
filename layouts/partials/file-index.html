@@ -1,17 +1,19 @@
 {{ $active := .active | default "posts" }}
 {{ $tabs := slice
-  (dict "id" "posts" "label" "Posts" "href" ("/" | relURL))
-  (dict "id" "projects" "label" "Projects" "href" ("/projects/" | relURL))
-  (dict "id" "publications" "label" "Publications" "href" ("/publications/" | relURL))
-  (dict "id" "contact" "label" "Contact" "href" ("/contact/" | relURL))
+  (dict "id" "posts" "label" "Posts" "href" ("/" | relURL) "pageTitle" site.Title)
+  (dict "id" "projects" "label" "Projects" "href" ("/projects/" | relURL) "pageTitle" (printf "Projects · %s" site.Title))
+  (dict "id" "publications" "label" "Publications" "href" ("/publications/" | relURL) "pageTitle" (printf "Publications · %s" site.Title))
+  (dict "id" "contact" "label" "Contact" "href" ("/contact/" | relURL) "pageTitle" (printf "Contact · %s" site.Title))
 }}
 
-<div class="file-index">
+<div class="file-index" data-file-index>
   <nav class="file-tabs" aria-label="Index views">
     {{ range $tabs }}
       <a
         class="file-tab{{ if eq $active .id }} active{{ end }}"
         href="{{ .href }}"
+        data-file-tab="{{ .id }}"
+        data-page-title="{{ .pageTitle }}"
         aria-label="Show {{ .label }}"
         title="Show {{ .label }}"
         {{ if eq $active .id }}aria-current="page"{{ end }}
@@ -19,17 +21,26 @@
     {{ end }}
   </nav>
 
-  <section class="file-panel" aria-labelledby="{{ $active }}-heading">
-    <h2 class="sr-only" id="{{ $active }}-heading">{{ title $active }}</h2>
-
-    {{ if eq $active "publications" }}
-      {{ partial "publication-list.html" hugo.Data.publications }}
-    {{ else if eq $active "projects" }}
-      {{ partial "page-list.html" (where site.RegularPages "Section" "projects") }}
-    {{ else if eq $active "contact" }}
-      {{ partial "contact-section.html" . }}
-    {{ else }}
+  <p class="sr-only" data-file-announcer aria-live="polite"></p>
+  <div class="file-panel-host" data-file-panel-host>
+    <section class="file-panel" data-file-panel="posts" aria-labelledby="posts-heading"{{ if ne $active "posts" }} hidden{{ end }}>
+      <h2 class="sr-only" id="posts-heading">Posts</h2>
       {{ partial "post-list.html" (where site.RegularPages "Section" "posts") }}
-    {{ end }}
-  </section>
+    </section>
+
+    <section class="file-panel" data-file-panel="projects" aria-labelledby="projects-heading"{{ if ne $active "projects" }} hidden{{ end }}>
+      <h2 class="sr-only" id="projects-heading">Projects</h2>
+      {{ partial "page-list.html" (where site.RegularPages "Section" "projects") }}
+    </section>
+
+    <section class="file-panel" data-file-panel="publications" aria-labelledby="publications-heading"{{ if ne $active "publications" }} hidden{{ end }}>
+      <h2 class="sr-only" id="publications-heading">Publications</h2>
+      {{ partial "publication-list.html" hugo.Data.publications }}
+    </section>
+
+    <section class="file-panel" data-file-panel="contact" aria-labelledby="contact-heading"{{ if ne $active "contact" }} hidden{{ end }}>
+      <h2 class="sr-only" id="contact-heading">Contact</h2>
+      {{ partial "contact-section.html" . }}
+    </section>
+  </div>
 </div>

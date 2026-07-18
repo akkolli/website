@@ -31,7 +31,7 @@ That is awkward for a large GPU. A 5090 has a lot of compute, but a single decod
 
 So raw GPU size does not always turn into efficient local inference.
 
-{{< figure src="/images/2_qwen36_tokens_per_kwh/fig5_autoregressive_decode.svg" alt="Autoregressive decoding diagram showing one model pass producing one accepted token at a time" />}}
+{{< figure src="/images/2_qwen36_tokens_per_kwh/fig5_autoregressive_decode.svg" width="1200" height="520" alt="Autoregressive decoding diagram showing one model pass producing one accepted token at a time" />}}
 
 Speculative decoding tries to fix this shape.
 
@@ -49,7 +49,7 @@ That is why the Qwen3.6 MTP model caught my attention. `Qwen3.6-27B` is a dense 
 
 Large enough to be useful. Small enough to run locally.
 
-{{< figure src="/images/2_qwen36_tokens_per_kwh/fig6_mtp_decode.svg" alt="MTP speculative decoding diagram showing a lookahead head proposing several draft tokens and the target model verifying them" />}}
+{{< figure src="/images/2_qwen36_tokens_per_kwh/fig6_mtp_decode.svg" width="1200" height="560" alt="MTP speculative decoding diagram showing a lookahead head proposing several draft tokens and the target model verifying them" />}}
 
 ## The 5090 settings
 
@@ -84,7 +84,7 @@ The same power settings without MTP gave me **32.1 tok/s**.
 
 So MTP was not a small change. It moved the setup from usable to comfortable.
 
-{{< figure src="/images/2_qwen36_tokens_per_kwh/author_nvidia_mtp_x6_215w_report.png" alt="Author measurement screenshot showing Qwen3.6-27B MTP throughput and a 215 watt GPU power reading" />}}
+{{< figure src="/images/2_qwen36_tokens_per_kwh/author_nvidia_mtp_x6_215w_report.png" width="1656" height="807" alt="Author measurement screenshot showing Qwen3.6-27B MTP throughput and a 215 watt GPU power reading" />}}
 
 ## The math
 
@@ -170,7 +170,7 @@ That is still fine for me. I would leave that running.
 
 Could I push the GPU lower? Yes. I can get the 5090 closer to **150 W**. I need a proper sweep before I say where the best point is. For now, 215 W is the point I like. It is fast enough, and it does not feel wasteful.
 
-{{< figure src="/images/2_qwen36_tokens_per_kwh/fig1_tokens_per_day.png" alt="Bar chart comparing generated tokens per day across the measured NVIDIA run and M3 Ultra benchmark rows" />}}
+{{< figure src="/images/2_qwen36_tokens_per_kwh/fig1_tokens_per_day.png" width="1800" height="990" alt="Bar chart comparing generated tokens per day across the measured NVIDIA run and M3 Ultra benchmark rows" />}}
 
 ## The Mac comparison
 
@@ -190,7 +190,7 @@ Those are good numbers for agent work. The missing number is power.
 
 Against my GPU only 215 W point, the M3 Ultra 80 core oQ4 MTP rows need to run around **95 to 104 W at the wall** to match the 5090 on generated tokens per kWh.
 
-{{< figure src="/images/2_qwen36_tokens_per_kwh/fig3_m3_break_even_power.png" alt="Bar chart showing the M3 Ultra wall-power levels needed to match the measured NVIDIA GPU-side tokens per kWh" />}}
+{{< figure src="/images/2_qwen36_tokens_per_kwh/fig3_m3_break_even_power.png" width="1800" height="990" alt="Bar chart showing the M3 Ultra wall-power levels needed to match the measured NVIDIA GPU-side tokens per kWh" />}}
 
 Against my rough 275 W whole box estimate, the break even numbers move up.
 
@@ -211,7 +211,7 @@ That is why I do not want to turn this into a clean win for either side. The Mac
 
 The real comparison needs outlet power during the same workload.
 
-{{< figure src="/images/2_qwen36_tokens_per_kwh/fig4_m3_power_sensitivity.png" alt="Line chart showing M3 Ultra tokens per kWh across different assumed wall-power levels" />}}
+{{< figure src="/images/2_qwen36_tokens_per_kwh/fig4_m3_power_sensitivity.png" width="1800" height="990" alt="Line chart showing M3 Ultra tokens per kWh across different assumed wall-power levels" />}}
 
 ## What changed for me
 

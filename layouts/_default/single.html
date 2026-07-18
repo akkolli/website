@@ -1,6 +1,7 @@
 {{ define "main" }}
-<article class="post" id="top">
+<main class="post" id="main-content">
   {{ $hasToc := and (ne .Params.toc false) (gt (len (findRE "<li>" .TableOfContents)) 0) }}
+  {{ $mobileToc := replace .TableOfContents `id="TableOfContents"` `id="MobileTableOfContents"` }}
   {{ $backHref := "/" | relURL }}
   {{ $backLabel := "Home" }}
   {{ if in (slice "projects" "websites") .Section }}
@@ -10,7 +11,7 @@
     {{ $backHref = "/publications/" | relURL }}
     {{ $backLabel = "Publications" }}
   {{ end }}
-  <div class="post-layout{{ if $hasToc }} has-toc{{ end }}">
+  <article class="post-layout{{ if $hasToc }} has-toc{{ end }}">
     {{ if $hasToc }}
       <aside class="post-margin" aria-label="Table of contents">
         <div class="toc">
@@ -48,16 +49,26 @@
             {{ end }}
           </div>
         {{ end }}
+
+        {{ if $hasToc }}
+          <details class="post-toc-inline">
+            <summary>On this page</summary>
+            <div class="post-toc-inline-body">
+              {{ $mobileToc | safeHTML }}
+            </div>
+          </details>
+        {{ end }}
       </header>
 
-      <main class="post-content">
+      <div class="post-content">
         {{ .Content }}
-      </main>
+      </div>
 
       <footer class="post-footer">
-        <a class="post-button" href="#top" aria-label="Scroll to top" title="Scroll to top">^ Top</a>
+        <a class="post-button" href="{{ $backHref }}" aria-label="Back to {{ $backLabel }}" title="Back to {{ $backLabel }}">&lt; {{ $backLabel }}</a>
+        <a class="post-button" href="#main-content" aria-label="Scroll to top" title="Scroll to top">^ Top</a>
       </footer>
     </div>
-  </div>
-</article>
+  </article>
+</main>
 {{ end }}

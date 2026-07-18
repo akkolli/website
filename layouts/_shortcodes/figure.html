@@ -2,13 +2,43 @@
 {{ $src := .Get "src" }}
 {{ $caption := .Get "caption" }}
 {{ $alt := .Get "alt" | default $caption }}
+{{ $width := .Get "width" }}
+{{ $height := .Get "height" }}
+{{ $loading := .Get "loading" | default "lazy" }}
+{{ $fetchpriority := .Get "fetchpriority" }}
 {{ $figures := .Page.Scratch.Get "figures" | default dict }}
 {{ $number := add (len $figures) 1 }}
 {{ .Page.Scratch.SetInMap "figures" $id $number }}
 
 <figure id="{{ $id }}" class="figure">
   {{ with $src }}
-    <img src="{{ . | relURL }}" alt="{{ $alt }}">
+    {{ $ext := path.Ext . }}
+    {{ $base := strings.TrimSuffix $ext . }}
+    {{ $srcset := slice }}
+    {{ range slice 480 644 768 960 1344 }}
+      {{ $candidate := printf "%s-%d.webp" $base . }}
+      {{ if fileExists (printf "static%s" $candidate) }}
+        {{ $srcset = $srcset | append (printf "%s %dw" ($candidate | relURL) .) }}
+      {{ end }}
+    {{ end }}
+    <picture class="figure-media">
+      {{ with $srcset }}
+        <source
+          type="image/webp"
+          srcset="{{ delimit . ", " }}"
+          sizes="(max-width: 860px) calc(100vw - 2rem), 42rem"
+        >
+      {{ end }}
+      <img
+        src="{{ . | relURL }}"
+        alt="{{ $alt }}"
+        {{ with $width }}width="{{ . }}"{{ end }}
+        {{ with $height }}height="{{ . }}"{{ end }}
+        loading="{{ $loading }}"
+        decoding="async"
+        {{ with $fetchpriority }}fetchpriority="{{ . }}"{{ end }}
+      >
+    </picture>
   {{ end }}
 
   {{ if or $caption .Inner }}

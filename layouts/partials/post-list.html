@@ -1,8 +1,10 @@
 {{ with . }}
-  <div class="tag-filter-status" data-tag-filter-status hidden>
-    <span>Showing <span data-tag-filter-name></span></span>
+  <div class="tag-filter-status" data-tag-filter-status aria-live="polite" hidden>
+    <span>Showing <span data-tag-filter-name></span> · <span data-tag-filter-count></span></span>
     <a href="{{ "/" | relURL }}" aria-label="Clear tag filter" title="Clear tag filter">clear</a>
   </div>
+
+  <p class="tag-empty" data-tag-empty hidden>No posts match this tag.</p>
 
   <div class="post-list" data-post-list>
     {{ range .ByDate.Reverse }}

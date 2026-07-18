@@ -68,7 +68,7 @@ So the practical distinction is not "does this GPU support FP4 at all?" It does.
 
 I still wanted to measure the card instead of just reading target tables. So I pulled CUTLASS and ran its NVFP4 matrix multiplication example on the RTX 5090.
 
-{{< figure src="/images/1_blackwell_dc_vs_gf/5090_65536_cropped.png" alt="A screenshot of a CUTLASS NVFP4 matrix multiplication benchmark on an RTX 5090" />}}
+{{< figure src="/images/1_blackwell_dc_vs_gf/5090_65536_cropped.png" width="236" height="77" alt="A screenshot of a CUTLASS NVFP4 matrix multiplication benchmark on an RTX 5090" />}}
 
 That is over a petaflop of NVFP4 compute.
 
@@ -76,7 +76,7 @@ A petaflop means one quadrillion floating-point operations per second. For a des
 
 But the next question is whether the Tensor Cores are being fed efficiently. Nsight Compute gives the more interesting picture.
 
-{{< figure src="/images/1_blackwell_dc_vs_gf/geforce_ncu.png" alt="Nsight Compute showing register pressure and memory bottlenecks on a GeForce GPU" />}}
+{{< figure src="/images/1_blackwell_dc_vs_gf/geforce_ncu.png" width="1974" height="807" alt="Nsight Compute showing register pressure and memory bottlenecks on a GeForce GPU" />}}
 
 The short read is: memory is the bottleneck. The Tensor Cores can chew through math faster than the rest of the kernel can keep them supplied. Shared memory pressure shows up immediately.
 
@@ -86,9 +86,9 @@ That is exactly the problem the datacenter path is designed to address.
 
 To compare against datacenter Blackwell, I rented a B200 instance on Vast.ai and ran the same kind of matrix multiplication with CUTLASS kernels targeting `sm_100a`.
 
-{{< figure src="/images/1_blackwell_dc_vs_gf/nvtop_b200.png" alt="nvtop showing B200 GPU memory capacity" />}}
+{{< figure src="/images/1_blackwell_dc_vs_gf/nvtop_b200.png" width="647" height="106" alt="nvtop showing B200 GPU memory capacity" />}}
 
-{{< figure src="/images/1_blackwell_dc_vs_gf/b200_65536_cropped.png" alt="A CUTLASS benchmark result from a B200 GPU" />}}
+{{< figure src="/images/1_blackwell_dc_vs_gf/b200_65536_cropped.png" width="300" height="108" alt="A CUTLASS benchmark result from a B200 GPU" />}}
 
 That run gets past 2 petaflops, and I suspect better kernels can push it further. The point is not just the number. The point is that the B200 has access to the datacenter Blackwell path that the 5090 does not.
 

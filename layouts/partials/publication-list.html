@@ -3,7 +3,7 @@
     {{ range sort . "date" "desc" }}
       {{ $pubTitle := .title }}
       {{ $authors := .authors }}
-      <article class="item-row">
+      <article class="item-row publication-row">
         <div class="item-year">
           {{ with .date }}
             {{ time.Format "Jan 2006" . }}
@@ -15,7 +15,13 @@
           <div class="item-head">
             <div class="item-title">{{ $pubTitle }}</div>
           </div>
+          {{ with .venue }}<p class="publication-venue">{{ . }}</p>{{ end }}
           {{ with $authors }}<p class="row-summary">{{ . }}</p>{{ end }}
+          {{ with .links }}
+            <span class="item-links publication-links">
+              {{ range . }}<a href="{{ .url }}" aria-label="{{ .label }} for {{ $pubTitle }}" title="{{ .label }} for {{ $pubTitle }}">{{ .label }}</a>{{ end }}
+            </span>
+          {{ end }}
         </div>
       </article>
     {{ end }}

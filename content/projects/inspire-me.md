@@ -17,7 +17,7 @@ math: false
 
 Inspire Me is a small browser app that displays a changing stream of words over a soft animated atmosphere. It is built as a static web app with JavaScript, Canvas, CSS typography controls, and a local word corpus.
 
-{{< figure src="/images/projects/inspire-me/preview.png" alt="Inspire Me showing a large word over a soft animated paper-like background." />}}
+{{< figure src="/images/projects/inspire-me/preview.png" width="1440" height="900" alt="Inspire Me showing a large word over a soft animated paper-like background." />}}
 
 ## What It Does
 
